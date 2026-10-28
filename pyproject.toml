@@ -1,0 +1,55 @@
+[project]
+name = "cindercrest"
+version = "2.0.0"
+description = "Cindercrest 2.0: Personal AI Operator for Windows 11"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "pydantic>=2.8.0",
+    "pydantic-settings>=2.4.0",
+    "python-dotenv>=1.0.0",
+    "httpx>=0.27.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.5.0",
+    "mypy>=1.10.0",
+]
+voice = [
+    "sounddevice>=0.5.0",
+    "pywin32>=306",
+    "comtypes>=1.4.0",
+    "faster-whisper>=1.0.0",
+    "onnxruntime>=1.18.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [".venv", "venv", "dist", "build", "frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_configs = true
+explicit_package_bases = true
+exclude = ["\\.venv/", "frontend/"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["backend/tests"]
+pythonpath = ["."]
